@@ -1,26 +1,29 @@
 from sys import exit
 from random import randint
 
-class Game(object):
+class engine(object): 
 
-    def __init__(self, start):
-        self.quips = [
-            "You died.  You kinda suck at this.",
-             "Your mom would be proud. If she were smarter.",
-             "Such a luser.",
-             "I have a small puppy that's better at this."
-        ]
-        self.start = start
+    def __init__(self, start, game): # creates internal variables for the "engine" class
+        self.start = start #
+        self.game = game
 
     def play(self):
         next = self.start
 
         while True:
             print "\n--------"
-            room = getattr(self, next)
+            room = getattr(self.game, next)
             next = room()
 
+class map(object):
 
+    def __init__(self):
+        self.quips = [
+                      "You died. You kinda suck at this.",
+                      "Your mum would be proud. If she were smarter.",
+                      "Such a luser.",
+                      "I have a small poppy that's better at this."
+            ]
     def death(self):
         print self.quips[randint(0, len(self.quips)-1)]
         exit(1)
@@ -162,5 +165,6 @@ class Game(object):
             exit(0)
 
 
-a_game = Game("central_corridor")
-a_game.play()
+a_game = map()
+play = engine('central_corridor', a_game)
+play.play()
